@@ -1,0 +1,116 @@
+Project Type: Responsive Business Website for Manga Art Teacher
+
+Goal: Create a clean, professional website to attract international clients, showcase teaching methodology, display portfolio, and capture inquiries.
+
+Core Pages/Sections:
+
+Hero Section - Immediate impact with clear value proposition
+
+About/Teaching Philosophy - Her unique 1-on-1 approach
+
+Services & Methodology - Step-by-step learning process
+
+Portfolio Gallery - Student work progression
+
+Contact Form - Clean inquiry capture
+
+Design Requirements:
+
+Clean, minimalist Japanese/manga-inspired aesthetic
+
+Mobile-responsive (50%+ international clients will be on mobile)
+
+Fast loading (optimize images)
+
+Subtle manga/anime accents without being childish
+
+Professional color scheme: dark blue/black + accent color (like crimson or indigo)
+
+Technical Stack:
+
+HTML5, CSS3 (Flexbox/Grid for layout)
+
+Vanilla JavaScript for interactivity
+
+No heavy frameworks for faster loading
+
+Form handling (consider Formspree or similar for backend)
+
+Specific Features Needed:
+
+Sticky navigation for easy section access
+
+Image gallery with lightbox for portfolio
+
+Contact form with validation
+
+Testimonial section (if she has quotes from students/parents)
+
+FAQ section addressing international student concerns
+
+Language toggle hint (potential future expansion)
+
+Clear call-to-action buttons throughout
+
+Content Structure:
+
+Header/Nav:
+
+Logo: "Manga Art" or her name
+
+Menu: Home, Teaching Method, Portfolio, Services, Contact
+
+Language indicator (flag icons optional)
+
+Hero Section:
+
+Headline: "Master Manga Art with Personalized 1-on-1 Guidance"
+
+Subheadline: "3 Years Experience · Step-by-Step Learning · International Students Welcome"
+
+Hero image: Her teaching or quality student work
+
+CTA Button: "Start Your Manga Journey"
+
+Teaching Methodology Section:
+
+Emphasize her personalized attention
+
+Visual timeline of student progression
+
+Icons representing: Fundamentals → Character Design → Storytelling → Advanced Techniques
+
+Portfolio Section:
+
+Filterable categories: Beginner Progress, Intermediate Work, Advanced Pieces
+
+Before/After student progression examples
+
+Click to enlarge with descriptions
+
+Services/Pricing:
+
+Clear packages: Beginner, Intermediate, Advanced
+
+International time zone considerations
+
+Platform used (Zoom, Skype, etc.)
+
+Trial lesson option
+
+Contact Section:
+
+Simple form: Name, Email, Country/Timezone, Current Skill Level, Message
+
+Response time expectation
+
+Alternative contact: email (business email recommended)
+
+Footer:
+
+Copyright
+
+Social media links (if any)
+
+Privacy policy link
+

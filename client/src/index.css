@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'DM Sans', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  /* Professional Purple Palette */
+  --primary: 262 83% 58%;
+  --primary-foreground: 0 0% 100%;
+  
+  --secondary: 262 20% 96%;
+  --secondary-foreground: 262 47% 20%;
+  
+  --muted: 262 10% 96%;
+  --muted-foreground: 262 10% 40%;
+  
+  --accent: 280 85% 70%;
+  --accent-foreground: 262 47% 10%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 262 10% 90%;
+  --input: 262 10% 90%;
+  --ring: 262 83% 58%;
+  
+  --background: 0 0% 100%;
+  --foreground: 262 47% 10%;
+  
+  --card: 0 0% 100%;
+  --card-foreground: 262 47% 10%;
+
+  --radius: 0.75rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/20 selection:text-primary;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Manga/Comic Aesthetic Patterns */
+  .bg-halftone {
+    background-image: radial-gradient(var(--tw-gradient-stops) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  
+  .manga-panel {
+    @apply border-2 border-black/10 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] transition-all duration-300;
+  }
+  
+  .manga-panel:hover {
+    @apply -translate-y-1 shadow-[8px_8px_0px_0px_rgba(139,92,246,0.3)] border-primary/50;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--secondary));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.5);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
