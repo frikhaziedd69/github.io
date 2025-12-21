@@ -48,11 +48,11 @@ export function Navigation() {
           <a 
             href="#hero" 
             onClick={(e) => scrollToSection(e, "#hero")}
-            className={`flex items-center gap-2 group transition-all duration-300 ${
+            className={`flex items-center transition-all duration-300 ${
               isScrolled ? "opacity-100" : "opacity-80 hover:opacity-100"
             }`}
           >
-            <img src={mangaLogo} alt="Manga Logo" className="h-12 w-auto drop-shadow-lg" />
+            <img src={mangaLogo} alt="Manga Art Logo" className="h-28 sm:h-36 md:h-48 w-auto" />
           </a>
 
           {/* Desktop Menu */}

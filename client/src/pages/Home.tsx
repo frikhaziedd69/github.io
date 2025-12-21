@@ -58,8 +58,8 @@ export default function Home() {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
       country: "",
-      skillLevel: "Beginner",
       message: "",
     },
   });
@@ -507,6 +507,19 @@ export default function Home() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
+                      <label className="text-sm font-semibold text-foreground">Phone Number</label>
+                      <input
+                        {...form.register("phone")}
+                        type="tel"
+                        className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                        placeholder="+1 (555) 123-4567"
+                      />
+                      {form.formState.errors.phone && (
+                        <p className="text-xs text-destructive">{form.formState.errors.phone.message}</p>
+                      )}
+                    </div>
+
+                    <div className="space-y-2">
                       <label className="text-sm font-semibold text-foreground">Country & Timezone</label>
                       <input
                         {...form.register("country")}
@@ -516,18 +529,6 @@ export default function Home() {
                       {form.formState.errors.country && (
                         <p className="text-xs text-destructive">{form.formState.errors.country.message}</p>
                       )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-sm font-semibold text-foreground">Current Skill Level</label>
-                      <select
-                        {...form.register("skillLevel")}
-                        className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none"
-                      >
-                        <option value="Beginner">Beginner (Just starting)</option>
-                        <option value="Intermediate">Intermediate (Some experience)</option>
-                        <option value="Advanced">Advanced (Looking to go pro)</option>
-                      </select>
                     </div>
                   </div>
 

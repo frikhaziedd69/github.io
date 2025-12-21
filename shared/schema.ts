@@ -6,8 +6,8 @@ export const inquiries = pgTable("inquiries", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull(),
+  phone: text("phone").notNull(),
   country: text("country").notNull(),
-  skillLevel: text("skill_level").notNull(), // Beginner, Intermediate, Advanced
   message: text("message").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
