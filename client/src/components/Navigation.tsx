@@ -62,8 +62,8 @@ export function Navigation() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollToSection(e, link.href)}
-                className={`text-sm font-medium transition-all hover:text-primary relative group ${
-                  isScrolled ? "text-muted-foreground" : "text-white/90 hover:text-white sm:text-muted-foreground sm:hover:text-primary"
+                className={`text-base font-bold transition-all hover:text-primary relative group ${
+                  isScrolled ? "text-black" : "text-black sm:text-black sm:hover:text-primary"
                 }`}
               >
                 {link.name}

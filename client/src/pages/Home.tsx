@@ -99,7 +99,7 @@ export default function Home() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sm font-medium mb-6">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              Accepting New Students for 2025
+              Accepting New Students for 2026
             </div>
             
             <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 tracking-tight">
@@ -359,21 +359,21 @@ export default function Home() {
             {[
               {
                 title: "Beginner",
-                price: "Trial",
-                features: ["Basic Anatomy", "Face Proportions", "Line Art Basics", "1 Hour Session"],
+                price: "$24 / 2 hours",
+                features: ["Basic Anatomy", "Face Proportions", "Line Art Basics", "2 Hours Session"],
                 ideal: "Just starting out"
               },
               {
                 title: "Intermediate",
-                price: "Standard",
-                features: ["Perspective & Backgrounds", "Clothing & Folds", "Dynamic Posing", "Weekly Assignments"],
+                price: "$79 / Month",
+                features: ["Perspective & Backgrounds", "Clothing & Folds", "Dynamic Posing", "Weekly Assignments: 2 hours / Session"],
                 ideal: "Building skills",
                 highlight: true
               },
               {
                 title: "Advanced",
-                price: "Pro",
-                features: ["Portfolio Development", "Storyboarding", "Professional Inking", "Publishing Advice"],
+                price: "$149 / Month",
+                features: ["Portfolio Development", "Storyboarding", "Professional Inking", "Weekly Assignments: 2 hours / Session"],
                 ideal: "Career focused"
               }
             ].map((plan, idx) => (
@@ -382,7 +382,7 @@ export default function Home() {
                 whileHover={{ y: -10 }}
                 className={`rounded-2xl p-8 flex flex-col h-full relative ${
                   plan.highlight 
-                    ? "bg-white text-foreground shadow-2xl scale-105 border-4 border-purple-400" 
+                    ? "bg-purple-100 text-foreground shadow-2xl scale-105 border-4 border-purple-400" 
                     : "bg-purple-700 backdrop-blur-md border border-purple-600 text-white hover:bg-purple-600"
                 }`}
               >
@@ -392,7 +392,8 @@ export default function Home() {
                   </div>
                 )}
                 <div className="mb-6">
-                  <h3 className="text-2xl font-bold mb-2 text-white">{plan.title}</h3>
+                  <h3 className={`text-2xl font-bold mb-2 ${plan.highlight ? "text-purple-900" : "text-white"}`}>{plan.title}</h3>
+                  <p className={`text-lg font-bold mb-2 ${plan.highlight ? "text-purple-700" : "text-purple-100"}`}>{plan.price}</p>
                   <p className={`text-sm ${plan.highlight ? "text-purple-600" : "text-purple-200"}`}>
                     Ideal for: {plan.ideal}
                   </p>
@@ -401,8 +402,8 @@ export default function Home() {
                 <div className="flex-grow space-y-4 mb-8">
                   {plan.features.map((feature, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <CheckCircle2 className={`w-5 h-5 flex-shrink-0 ${plan.highlight ? "text-purple-600" : "text-purple-300"}`} />
-                      <span className={`text-sm font-medium ${plan.highlight ? "text-foreground" : "text-white"}`}>{feature}</span>
+                      <CheckCircle2 className={`w-5 h-5 flex-shrink-0 ${plan.highlight ? "text-purple-700" : "text-purple-300"}`} />
+                      <span className={`text-sm font-medium ${plan.highlight ? "text-purple-900" : "text-white"}`}>{feature}</span>
                     </div>
                   ))}
                 </div>
