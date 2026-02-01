@@ -1,16 +1,17 @@
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { 
-  ArrowRight, 
-  CheckCircle2, 
-  Video, 
-  Globe, 
-  Clock, 
-  Palette, 
-  BookOpen, 
-  PenTool, 
+import {
+  ArrowRight,
+  CheckCircle2,
+  Video,
+  Globe,
+  Clock,
+  Palette,
+  BookOpen,
+  PenTool,
   Sparkles,
   Loader2,
   Expand,
@@ -65,6 +66,22 @@ export default function Home() {
   });
 
   const onSubmit = (data: InsertInquiry) => {
+    // Send email via EmailJS
+    emailjs.send(
+      "service_1zsak8o",
+      "template_2fvf1un",
+      {
+        name: data.name,
+        phone_number: data.phone,
+        country: data.country,
+        message: data.message,
+      },
+      "lwYdfyBH1QlfP17WS"
+    ).then(
+      () => console.log("Email sent successfully"),
+      (error) => console.error("EmailJS Error:", error)
+    );
+
     createInquiry.mutate(data, {
       onSuccess: () => {
         form.reset();
@@ -80,9 +97,9 @@ export default function Home() {
       <section id="hero" className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src={heroBg} 
-            alt="Manga Art Studio" 
+          <img
+            src={heroBg}
+            alt="Manga Art Studio"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-950/90 to-purple-900/40 backdrop-blur-[2px]" />
@@ -91,7 +108,7 @@ export default function Home() {
         </div>
 
         <div className="relative z-10 container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -101,14 +118,14 @@ export default function Home() {
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               Accepting New Students for 2026
             </div>
-            
+
             <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 tracking-tight">
               Master Manga Art with <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-300">
                 Personalized Guidance
               </span>
             </h1>
-            
+
             <p className="text-xl md:text-2xl text-purple-100 mb-8 leading-relaxed max-w-2xl font-light">
               Transform your sketches into professional artwork through my step-by-step 1-on-1 mentorship program tailored to your unique style.
             </p>
@@ -122,14 +139,14 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <a 
+              <a
                 href="#contact"
                 className="px-8 py-4 rounded-xl bg-white text-purple-900 font-bold text-lg hover:bg-purple-50 transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-1 active:translate-y-0 flex items-center justify-center gap-2 group"
               >
                 Start Your Journey
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </a>
-              <a 
+              <a
                 href="#portfolio"
                 className="px-8 py-4 rounded-xl bg-transparent border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-all flex items-center justify-center"
               >
@@ -147,8 +164,8 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-300/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <SectionHeading 
-            title="My Teaching Philosophy" 
+          <SectionHeading
+            title="My Teaching Philosophy"
             subtitle="The Path to Mastery"
             alignment="center"
           />
@@ -159,25 +176,25 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { 
-                icon: BookOpen, 
-                title: "Fundamentals", 
-                desc: "Anatomy, perspective, and composition basics that form the backbone of all great art." 
+              {
+                icon: BookOpen,
+                title: "Fundamentals",
+                desc: "Anatomy, perspective, and composition basics that form the backbone of all great art."
               },
-              { 
-                icon: Palette, 
-                title: "Character Design", 
-                desc: "Creating memorable characters with distinct personalities through shape language and costume." 
+              {
+                icon: Palette,
+                title: "Character Design",
+                desc: "Creating memorable characters with distinct personalities through shape language and costume."
               },
-              { 
-                icon: PenTool, 
-                title: "Storytelling", 
-                desc: "Visual narrative techniques, paneling flow, and pacing to make your manga readable and exciting." 
+              {
+                icon: PenTool,
+                title: "Storytelling",
+                desc: "Visual narrative techniques, paneling flow, and pacing to make your manga readable and exciting."
               },
-              { 
-                icon: Sparkles, 
-                title: "Advanced Tech", 
-                desc: "Inking, screening, and digital tools to give your work that professional polished finish." 
+              {
+                icon: Sparkles,
+                title: "Advanced Tech",
+                desc: "Inking, screening, and digital tools to give your work that professional polished finish."
               }
             ].map((step, index) => (
               <motion.div
@@ -204,12 +221,12 @@ export default function Home() {
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section 1: My Digital Artwork */}
           <div className="mb-20">
-            <SectionHeading 
-              title="My Digital Artwork" 
+            <SectionHeading
+              title="My Digital Artwork"
               subtitle="Original Works"
               alignment="left"
             />
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
               {myDigitalArtwork.map((img, idx) => (
                 <motion.div
@@ -280,12 +297,12 @@ export default function Home() {
 
           {/* Section 2: Workshop Photos */}
           <div className="border-t pt-12">
-            <SectionHeading 
-              title="Workshop Sessions" 
+            <SectionHeading
+              title="Workshop Sessions"
               subtitle="Teaching in Action"
               alignment="left"
             />
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {workshopPhotos.map((img, idx) => (
                 <motion.div
@@ -322,7 +339,7 @@ export default function Home() {
 
       {/* LIGHTBOX */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
           onClick={() => setSelectedImage(null)}
         >
@@ -335,7 +352,7 @@ export default function Home() {
             src={selectedImage}
             alt="Gallery Fullscreen"
             className="max-h-[90vh] max-w-full rounded-lg shadow-2xl"
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => e.stopPropagation()}
           />
         </div>
       )}
@@ -344,13 +361,13 @@ export default function Home() {
       <section id="services" className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
         {/* Abstract shapes in background */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-           <div className="absolute top-10 left-10 w-64 h-64 border-4 border-white rounded-full" />
-           <div className="absolute bottom-20 right-20 w-96 h-96 border-4 border-white rotate-45" />
+          <div className="absolute top-10 left-10 w-64 h-64 border-4 border-white rounded-full" />
+          <div className="absolute bottom-20 right-20 w-96 h-96 border-4 border-white rotate-45" />
         </div>
 
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <SectionHeading 
-            title="Choose Your Path" 
+          <SectionHeading
+            title="Choose Your Path"
             subtitle="Curriculum Options"
             light={true}
           />
@@ -380,11 +397,10 @@ export default function Home() {
               <motion.div
                 key={idx}
                 whileHover={{ y: -10 }}
-                className={`rounded-2xl p-8 flex flex-col h-full relative ${
-                  plan.highlight 
-                    ? "bg-purple-100 text-foreground shadow-2xl scale-105 border-4 border-purple-400" 
-                    : "bg-purple-700 backdrop-blur-md border border-purple-600 text-white hover:bg-purple-600"
-                }`}
+                className={`rounded-2xl p-8 flex flex-col h-full relative ${plan.highlight
+                  ? "bg-purple-100 text-foreground shadow-2xl scale-105 border-4 border-purple-400"
+                  : "bg-purple-700 backdrop-blur-md border border-purple-600 text-white hover:bg-purple-600"
+                  }`}
               >
                 {plan.highlight && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-bold shadow-lg">
@@ -398,7 +414,7 @@ export default function Home() {
                     Ideal for: {plan.ideal}
                   </p>
                 </div>
-                
+
                 <div className="flex-grow space-y-4 mb-8">
                   {plan.features.map((feature, i) => (
                     <div key={i} className="flex items-start gap-3">
@@ -408,13 +424,12 @@ export default function Home() {
                   ))}
                 </div>
 
-                <a 
+                <a
                   href="#contact"
-                  className={`w-full py-3 rounded-xl font-bold text-center transition-all ${
-                    plan.highlight
-                      ? "bg-purple-600 text-white hover:bg-purple-700 shadow-lg shadow-purple-600/30"
-                      : "bg-white/20 hover:bg-white/30 text-white"
-                  }`}
+                  className={`w-full py-3 rounded-xl font-bold text-center transition-all ${plan.highlight
+                    ? "bg-purple-600 text-white hover:bg-purple-700 shadow-lg shadow-purple-600/30"
+                    : "bg-white/20 hover:bg-white/30 text-white"
+                    }`}
                 >
                   Inquire Now
                 </a>
@@ -454,7 +469,7 @@ export default function Home() {
                   <p className="text-purple-100 mb-8 leading-relaxed">
                     Ready to take your art to the next level? Fill out the form and I'll get back to you within 24 hours.
                   </p>
-                  
+
                   <div className="space-y-6">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
@@ -462,13 +477,13 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="text-sm text-purple-200">Email</p>
-                        <p className="font-medium">contact@mangaart.com</p>
+                        <p className="font-medium">contact@mangaarttn.com</p>
                       </div>
                     </div>
                     {/* Add more contact info here if needed */}
                   </div>
                 </div>
-                
+
                 <div className="mt-10 lg:mt-0">
                   <div className="w-full h-32 bg-white/10 rounded-xl relative overflow-hidden p-6 flex items-center justify-center">
                     <p className="font-display font-bold text-xl italic opacity-80">"Art is not what you see, but what you make others see."</p>
@@ -491,7 +506,7 @@ export default function Home() {
                         <p className="text-xs text-destructive">{form.formState.errors.name.message}</p>
                       )}
                     </div>
-                    
+
                     <div className="space-y-2">
                       <label className="text-sm font-semibold text-foreground">Email</label>
                       <input
@@ -572,27 +587,27 @@ export default function Home() {
           <div className="flex flex-col items-center gap-6">
             <p className="text-lg font-semibold">Follow My Journey</p>
             <div className="flex gap-6">
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
+              <a
+                href="https://linkedin.com"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all hover:scale-110"
                 title="LinkedIn"
               >
                 <Linkedin className="w-6 h-6" />
               </a>
-              <a 
-                href="https://facebook.com" 
-                target="_blank" 
+              <a
+                href="https://facebook.com"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all hover:scale-110"
                 title="Facebook"
               >
                 <Facebook className="w-6 h-6" />
               </a>
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
+              <a
+                href="https://instagram.com"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all hover:scale-110"
                 title="Instagram"
@@ -608,11 +623,11 @@ export default function Home() {
       <footer className="bg-white border-t border-border py-12">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
-             <span className="font-display font-bold text-xl tracking-tight">
+            <span className="font-display font-bold text-xl tracking-tight">
               Manga Art<span className="text-primary">.</span>
             </span>
           </div>
-          
+
           <div className="text-sm text-muted-foreground text-center md:text-right">
             <p>&copy; {new Date().getFullYear()} Manga Art Teacher. All rights reserved.</p>
             <div className="flex gap-4 justify-center md:justify-end mt-2">
