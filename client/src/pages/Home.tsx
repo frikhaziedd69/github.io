@@ -359,7 +359,7 @@ export default function Home() {
             {[
               {
                 title: "Beginner",
-                price: "$24 / 2 Hours",
+                price: "$24 / 2 hours",
                 features: ["Basic Anatomy", "Face Proportions", "Line Art Basics", "2 Hours Session"],
                 ideal: "Just starting out"
               },
@@ -462,7 +462,7 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="text-sm text-purple-200">Email</p>
-                        <p className="font-medium">contact@mangaarttn.com</p>
+                        <p className="font-medium">contact@mangaart.com</p>
                       </div>
                     </div>
                     {/* Add more contact info here if needed */}
@@ -573,7 +573,7 @@ export default function Home() {
             <p className="text-lg font-semibold">Follow My Journey</p>
             <div className="flex gap-6">
               <a 
-                href="https://www.linkedin.com/in/manga-art-8967273a1/" 
+                href="https://linkedin.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all hover:scale-110"
@@ -582,7 +582,7 @@ export default function Home() {
                 <Linkedin className="w-6 h-6" />
               </a>
               <a 
-                href="https://www.facebook.com/profile.php?id=61561385984895" 
+                href="https://facebook.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all hover:scale-110"
@@ -591,7 +591,7 @@ export default function Home() {
                 <Facebook className="w-6 h-6" />
               </a>
               <a 
-                href="https://www.instagram.com/manga_art_tunis/" 
+                href="https://instagram.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all hover:scale-110"
