@@ -1,20 +1,28 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import mangaLogo from "/images/manga-logo.png";
 
 const navLinks = [
-  { name: "Home", href: "#hero" },
-  { name: "Methodology", href: "#methodology" },
-  { name: "Portfolio", href: "#portfolio" },
-  { name: "Services", href: "#services" },
-  { name: "Contact", href: "#contact" },
+  { name: "nav.home", href: "#hero" },
+  { name: "nav.methodology", href: "#methodology" },
+  { name: "nav.portfolio", href: "#portfolio" },
+  { name: "nav.services", href: "#services" },
+  { name: "nav.contact", href: "#contact" },
 ];
 
 export function Navigation() {
+  const { t, i18n } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleLanguage = () => {
+    const nextLang = i18n.language === 'en' ? 'ar' : 'en';
+    i18n.changeLanguage(nextLang);
+    document.dir = nextLang === 'ar' ? 'rtl' : 'ltr';
+  };
 
   // Handle scroll effect for sticky header
   useEffect(() => {
@@ -66,10 +74,30 @@ export function Navigation() {
                   isScrolled ? "text-black" : "text-black sm:text-black sm:hover:text-primary"
                 }`}
               >
-                {link.name}
+                {t(link.name)}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
               </a>
             ))}
+            
+            <button
+              onClick={toggleLanguage}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-full border border-border hover:bg-secondary transition-colors ${
+                isScrolled ? "text-black border-black/20" : "text-black border-black/20"
+              }`}
+            >
+              {i18n.language === 'en' ? (
+                <>
+                  <span className="text-lg">🇸🇦</span>
+                  <span className="text-xs font-bold">AR</span>
+                </>
+              ) : (
+                <>
+                  <span className="text-lg">🇬🇧</span>
+                  <span className="text-xs font-bold">EN</span>
+                </>
+              )}
+            </button>
+
             <a
               href="#contact"
               onClick={(e) => scrollToSection(e, "#contact")}
@@ -79,17 +107,25 @@ export function Navigation() {
                   : "bg-white text-primary shadow-xl"
               }`}
             >
-              Start Learning
+              {t("nav.start_learning")}
             </a>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 text-foreground"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu className={!isScrolled ? "text-white sm:text-foreground" : ""} />}
-          </button>
+          <div className="flex items-center gap-4 md:hidden">
+            <button
+              onClick={toggleLanguage}
+              className="p-2 text-foreground"
+            >
+              {i18n.language === 'en' ? "🇸🇦" : "🇬🇧"}
+            </button>
+            <button
+              className="p-2 text-foreground"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X /> : <Menu className={!isScrolled ? "text-white sm:text-foreground" : ""} />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -110,7 +146,7 @@ export function Navigation() {
                   onClick={(e) => scrollToSection(e, link.href)}
                   className="text-lg font-medium text-foreground hover:text-primary"
                 >
-                  {link.name}
+                  {t(link.name)}
                 </a>
               ))}
               <a
@@ -118,7 +154,7 @@ export function Navigation() {
                 onClick={(e) => scrollToSection(e, "#contact")}
                 className="w-full text-center px-6 py-3 rounded-xl bg-primary text-primary-foreground font-semibold"
               >
-                Book a Lesson
+                {t("nav.start_learning")}
               </a>
             </div>
           </motion.div>

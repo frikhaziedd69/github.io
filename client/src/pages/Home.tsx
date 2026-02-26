@@ -3,6 +3,7 @@ import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   ArrowRight,
   CheckCircle2,
@@ -16,7 +17,7 @@ import {
   Loader2,
   Expand,
   X,
-  Linkedin,
+  MessageCircle,
   Facebook,
   Instagram
 } from "lucide-react";
@@ -30,29 +31,31 @@ import heroBg from "@assets/IMG_5241_1766236580283.jpeg";
 
 // Gallery Images - Split into Artwork and Workshop sections
 const myDigitalArtwork = [
-  { src: "/images/portfolio-character-1.jpg", title: "Character Design" },
-  { src: "/images/portfolio-character-2.png", title: "Digital Coloring" },
-  { src: "/images/portfolio-character-3.png", title: "Action Poses" },
+  { src: "/images/portfolio-character-1.jpg", title: "portfolio.enlarge" },
+  { src: "/images/portfolio-character-2.png", title: "portfolio.enlarge" },
+  { src: "/images/portfolio-character-3.png", title: "portfolio.enlarge" },
 ];
 
 const mySketches = [
-  { src: "/images/sketch-paper-1.jpg", title: "Paper Sketches - Composition" },
-  { src: "/images/sketch-paper-2.jpg", title: "Paper Sketches - Dynamic Poses" },
-  { src: "/images/sketch-paper-3.jpg", title: "Paper Sketches - Panel Work" },
+  { src: "/images/sketch-paper-1.jpg", title: "portfolio.enlarge" },
+  { src: "/images/sketch-paper-2.jpg", title: "portfolio.enlarge" },
+  { src: "/images/sketch-paper-3.jpg", title: "portfolio.enlarge" },
 ];
 
 const workshopPhotos = [
-  { src: "/images/classroom-1.jpg", title: "Workshop Session" },
-  { src: "/images/classroom-2.jpg", title: "Student Feedback" },
-  { src: "/images/classroom-3.jpg", title: "Live Teaching" },
-  { src: "/images/students-working.jpg", title: "Students at Work" },
-  { src: "/images/students-certificates.jpg", title: "Student Success" },
-  { src: "/images/student-work-panels-1.jpg", title: "Student Work Review" },
+  { src: "/images/classroom-1.jpg", title: "portfolio.enlarge" },
+  { src: "/images/classroom-2.jpg", title: "portfolio.enlarge" },
+  { src: "/images/classroom-3.jpg", title: "portfolio.enlarge" },
+  { src: "/images/students-working.jpg", title: "portfolio.enlarge" },
+  { src: "/images/students-certificates.jpg", title: "portfolio.enlarge" },
+  { src: "/images/student-work-panels-1.jpg", title: "portfolio.enlarge" },
 ];
 
 export default function Home() {
+  const { t, i18n } = useTranslation();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const createInquiry = useCreateInquiry();
+  const isRtl = i18n.language === "ar";
 
   const form = useForm<InsertInquiry>({
     resolver: zodResolver(insertInquirySchema),
@@ -90,7 +93,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div className={`min-h-screen bg-background font-sans ${isRtl ? "font-arabic" : ""}`} dir={isRtl ? "rtl" : "ltr"}>
       <Navigation />
 
       {/* HERO SECTION */}
@@ -112,30 +115,30 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-3xl text-white"
+            className={`max-w-3xl text-white ${isRtl ? "text-right" : "text-left"}`}
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sm font-medium mb-6">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-              Accepting New Students for 2026
+              {t("hero.badge")}
             </div>
 
             <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 tracking-tight">
-              Master Manga Art with <br />
+              {t("hero.title")} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-300">
-                Personalized Guidance
+                {t("hero.title_span")}
               </span>
             </h1>
 
             <p className="text-xl md:text-2xl text-purple-100 mb-8 leading-relaxed max-w-2xl font-light">
-              Transform your sketches into professional artwork through my step-by-step 1-on-1 mentorship program tailored to your unique style.
+              {t("hero.desc")}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center text-sm md:text-base text-purple-200 mb-10">
-              <span className="flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-green-400" /> 3+ Years Teaching Experience</span>
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-green-400" /> {t("hero.exp")}</span>
               <span className="hidden sm:inline text-white/30">•</span>
-              <span className="flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-green-400" /> International Students Welcomed</span>
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-green-400" /> {t("hero.intl")}</span>
               <span className="hidden sm:inline text-white/30">•</span>
-              <span className="flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-green-400" /> English & Arabic Support</span>
+              <span className="flex items-center gap-2"><CheckCircle2 className="w-5 h-5 text-green-400" /> {t("hero.support")}</span>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -143,14 +146,14 @@ export default function Home() {
                 href="#contact"
                 className="px-8 py-4 rounded-xl bg-white text-purple-900 font-bold text-lg hover:bg-purple-50 transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:-translate-y-1 active:translate-y-0 flex items-center justify-center gap-2 group"
               >
-                Start Your Journey
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                {t("hero.cta_start")}
+                <ArrowRight className={`w-5 h-5 transition-transform ${isRtl ? "rotate-180 group-hover:-translate-x-1" : "group-hover:translate-x-1"}`} />
               </a>
               <a
                 href="#portfolio"
                 className="px-8 py-4 rounded-xl bg-transparent border-2 border-white/30 text-white font-semibold text-lg hover:bg-white/10 transition-all flex items-center justify-center"
               >
-                View Student Work
+                {t("hero.cta_portfolio")}
               </a>
             </div>
           </motion.div>
@@ -165,36 +168,36 @@ export default function Home() {
 
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionHeading
-            title="My Teaching Philosophy"
-            subtitle="The Path to Mastery"
+            title={t("methodology.title")}
+            subtitle={t("methodology.subtitle")}
             alignment="center"
           />
 
           <p className="text-center max-w-2xl mx-auto text-lg text-muted-foreground mb-16">
-            I believe every artist has a unique magic hand. My role isn't just to teach you how to draw, but to help you discover and refine your personal style through structured, supportive guidance.
+            {t("methodology.desc")}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 icon: BookOpen,
-                title: "Fundamentals",
-                desc: "Anatomy, perspective, and composition basics that form the backbone of all great art."
+                title: t("methodology.fundamentals"),
+                desc: t("methodology.fundamentals_desc")
               },
               {
                 icon: Palette,
-                title: "Character Design",
-                desc: "Creating memorable characters with distinct personalities through shape language and costume."
+                title: t("methodology.character"),
+                desc: t("methodology.character_desc")
               },
               {
                 icon: PenTool,
-                title: "Storytelling",
-                desc: "Visual narrative techniques, paneling flow, and pacing to make your manga readable and exciting."
+                title: t("methodology.storytelling"),
+                desc: t("methodology.storytelling_desc")
               },
               {
                 icon: Sparkles,
-                title: "Advanced Tech",
-                desc: "Inking, screening, and digital tools to give your work that professional polished finish."
+                title: t("methodology.advanced"),
+                desc: t("methodology.advanced_desc")
               }
             ].map((step, index) => (
               <motion.div
@@ -219,12 +222,12 @@ export default function Home() {
       {/* PORTFOLIO SECTION */}
       <section id="portfolio" className="py-24 bg-white">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section 1: My Digital Artwork */}
+          {/* Section 1: Portfolio Digital */}
           <div className="mb-20">
             <SectionHeading
-              title="My Digital Artwork"
-              subtitle="Original Works"
-              alignment="left"
+              title={t("portfolio.digital_title")}
+              subtitle={t("portfolio.digital_subtitle")}
+              alignment={isRtl ? "right" : "left"}
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
@@ -240,18 +243,15 @@ export default function Home() {
                 >
                   <img
                     src={img.src}
-                    alt={img.title}
+                    alt={t(img.title)}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                    <h3 className="text-white font-bold text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                      {img.title}
-                    </h3>
                     <p className="text-white/80 text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                      Click to enlarge
+                      {t("portfolio.enlarge")}
                     </p>
                   </div>
-                  <div className="absolute top-4 right-4 bg-black/50 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+                  <div className={`absolute top-4 ${isRtl ? "left-4" : "right-4"} bg-black/50 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm`}>
                     <Expand className="w-4 h-4" />
                   </div>
                 </motion.div>
@@ -260,8 +260,8 @@ export default function Home() {
 
             {/* Sketches Subsection */}
             <div className="border-t pt-12">
-              <h3 className="text-2xl font-display font-bold mb-2 text-purple-900">My Sketches on Paper</h3>
-              <p className="text-muted-foreground mb-8">Hand-drawn sketches that show my artistic process</p>
+              <h3 className="text-2xl font-display font-bold mb-2 text-purple-900">{t("portfolio.sketches_title")}</h3>
+              <p className="text-muted-foreground mb-8">{t("portfolio.sketches_subtitle")}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {mySketches.map((img, idx) => (
                   <motion.div
@@ -275,18 +275,15 @@ export default function Home() {
                   >
                     <img
                       src={img.src}
-                      alt={img.title}
+                      alt={t(img.title)}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                      <h3 className="text-white font-bold text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        {img.title}
-                      </h3>
                       <p className="text-white/80 text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                        Click to enlarge
+                        {t("portfolio.enlarge")}
                       </p>
                     </div>
-                    <div className="absolute top-4 right-4 bg-black/50 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+                    <div className={`absolute top-4 ${isRtl ? "left-4" : "right-4"} bg-black/50 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm`}>
                       <Expand className="w-4 h-4" />
                     </div>
                   </motion.div>
@@ -298,9 +295,9 @@ export default function Home() {
           {/* Section 2: Workshop Photos */}
           <div className="border-t pt-12">
             <SectionHeading
-              title="Workshop Sessions"
-              subtitle="Teaching in Action"
-              alignment="left"
+              title={t("portfolio.workshop_title")}
+              subtitle={t("portfolio.workshop_subtitle")}
+              alignment={isRtl ? "right" : "left"}
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -316,18 +313,15 @@ export default function Home() {
                 >
                   <img
                     src={img.src}
-                    alt={img.title}
+                    alt={t(img.title)}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                    <h3 className="text-white font-bold text-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                      {img.title}
-                    </h3>
                     <p className="text-white/80 text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                      Click to enlarge
+                      {t("portfolio.enlarge")}
                     </p>
                   </div>
-                  <div className="absolute top-4 right-4 bg-black/50 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+                  <div className={`absolute top-4 ${isRtl ? "left-4" : "right-4"} bg-black/50 p-2 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm`}>
                     <Expand className="w-4 h-4" />
                   </div>
                 </motion.div>
@@ -343,7 +337,7 @@ export default function Home() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <button className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors">
+          <button className={`absolute top-6 ${isRtl ? "left-6" : "right-6"} text-white/70 hover:text-white transition-colors`}>
             <X className="w-10 h-10" />
           </button>
           <motion.img
@@ -367,31 +361,31 @@ export default function Home() {
 
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionHeading
-            title="Choose Your Path"
-            subtitle="Curriculum Options"
+            title={t("services.title")}
+            subtitle={t("services.subtitle")}
             light={true}
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
-                title: "Beginner",
+                title: t("services.beginner"),
                 price: "$24 / 2 hours",
-                features: ["Basic Anatomy", "Face Proportions", "Line Art Basics", "2 Hours Session"],
-                ideal: "Just starting out"
+                features: ["services.features.anatomy", "services.features.proportions", "services.features.lineart", "services.features.2hours"],
+                ideal: t("services.ideal.beginner")
               },
               {
-                title: "Intermediate",
+                title: t("services.intermediate"),
                 price: "$79 / Month",
-                features: ["Perspective & Backgrounds", "Clothing & Folds", "Dynamic Posing", "Weekly Assignments: 2 hours / Session"],
-                ideal: "Building skills",
+                features: ["services.features.perspective", "services.features.clothing", "services.features.posing", "services.features.assignments_2h"],
+                ideal: t("services.ideal.intermediate"),
                 highlight: true
               },
               {
-                title: "Advanced",
+                title: t("services.advanced"),
                 price: "$149 / Month",
-                features: ["Portfolio Development", "Storyboarding", "Professional Inking", "Weekly Assignments: 2 hours / Session"],
-                ideal: "Career focused"
+                features: ["services.features.portfolio", "services.features.storyboarding", "services.features.inking", "services.features.assignments_2h"],
+                ideal: t("services.ideal.advanced")
               }
             ].map((plan, idx) => (
               <motion.div
@@ -404,14 +398,14 @@ export default function Home() {
               >
                 {plan.highlight && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-accent-foreground px-4 py-1 rounded-full text-sm font-bold shadow-lg">
-                    Most Popular
+                    {t("services.popular")}
                   </div>
                 )}
                 <div className="mb-6">
                   <h3 className={`text-2xl font-bold mb-2 ${plan.highlight ? "text-purple-900" : "text-white"}`}>{plan.title}</h3>
                   <p className={`text-lg font-bold mb-2 ${plan.highlight ? "text-purple-700" : "text-purple-100"}`}>{plan.price}</p>
                   <p className={`text-sm ${plan.highlight ? "text-purple-600" : "text-purple-200"}`}>
-                    Ideal for: {plan.ideal}
+                    {t("services.ideal")}: {plan.ideal}
                   </p>
                 </div>
 
@@ -419,7 +413,7 @@ export default function Home() {
                   {plan.features.map((feature, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <CheckCircle2 className={`w-5 h-5 flex-shrink-0 ${plan.highlight ? "text-purple-700" : "text-purple-300"}`} />
-                      <span className={`text-sm font-medium ${plan.highlight ? "text-purple-900" : "text-white"}`}>{feature}</span>
+                      <span className={`text-sm font-medium ${plan.highlight ? "text-purple-900" : "text-white"}`}>{t(feature)}</span>
                     </div>
                   ))}
                 </div>
@@ -431,7 +425,7 @@ export default function Home() {
                     : "bg-white/20 hover:bg-white/30 text-white"
                     }`}
                 >
-                  Inquire Now
+                  {t("services.inquire")}
                 </a>
               </motion.div>
             ))}
@@ -440,18 +434,18 @@ export default function Home() {
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto text-center">
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
               <Globe className="w-8 h-8 mx-auto mb-2 text-purple-200" />
-              <h4 className="font-bold">International Friendly</h4>
-              <p className="text-sm text-purple-200">Time zone accommodations available</p>
+              <h4 className="font-bold">{t("services.intl")}</h4>
+              <p className="text-sm text-purple-200">{t("services.intl_desc")}</p>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
               <Video className="w-8 h-8 mx-auto mb-2 text-purple-200" />
-              <h4 className="font-bold">Online Classes</h4>
-              <p className="text-sm text-purple-200">Live 1-on-1 via Zoom or Google Meet</p>
+              <h4 className="font-bold">{t("services.online")}</h4>
+              <p className="text-sm text-purple-200">{t("services.online_desc")}</p>
             </div>
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10">
               <Clock className="w-8 h-8 mx-auto mb-2 text-purple-200" />
-              <h4 className="font-bold">Flexible Scheduling</h4>
-              <p className="text-sm text-purple-200">Sessions that fit your life</p>
+              <h4 className="font-bold">{t("services.flexible")}</h4>
+              <p className="text-sm text-purple-200">{t("services.flexible_desc")}</p>
             </div>
           </div>
         </div>
@@ -465,22 +459,21 @@ export default function Home() {
               {/* Info Sidebar */}
               <div className="bg-primary p-10 text-white lg:col-span-2 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-3xl font-display font-bold mb-6">Let's Draw Together</h3>
+                  <h3 className="text-3xl font-display font-bold mb-6">{t("contact.title")}</h3>
                   <p className="text-purple-100 mb-8 leading-relaxed">
-                    Ready to take your art to the next level? Fill out the form and I'll get back to you within 24 hours.
+                    {t("contact.desc")}
                   </p>
 
                   <div className="space-y-6">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                        <ArrowRight className="w-5 h-5" />
+                        <ArrowRight className={`w-5 h-5 ${isRtl ? "rotate-180" : ""}`} />
                       </div>
                       <div>
-                        <p className="text-sm text-purple-200">Email</p>
+                        <p className="text-sm text-purple-200">{t("contact.form_email")}</p>
                         <p className="font-medium">contact@mangaarttn.com</p>
                       </div>
                     </div>
-                    {/* Add more contact info here if needed */}
                   </div>
                 </div>
 
@@ -496,11 +489,11 @@ export default function Home() {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-foreground">Name</label>
+                      <label className="text-sm font-semibold text-foreground">{t("contact.form_name")}</label>
                       <input
                         {...form.register("name")}
                         className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        placeholder="Your name"
+                        placeholder={t("contact.form_name")}
                       />
                       {form.formState.errors.name && (
                         <p className="text-xs text-destructive">{form.formState.errors.name.message}</p>
@@ -508,7 +501,7 @@ export default function Home() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-foreground">Email</label>
+                      <label className="text-sm font-semibold text-foreground">{t("contact.form_email")}</label>
                       <input
                         {...form.register("email")}
                         type="email"
@@ -523,12 +516,12 @@ export default function Home() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-foreground">Phone Number</label>
+                      <label className="text-sm font-semibold text-foreground">{t("contact.form_phone")}</label>
                       <input
                         {...form.register("phone")}
                         type="tel"
                         className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        placeholder="+1 (555) 123-4567"
+                        placeholder="+216 23 774 404"
                       />
                       {form.formState.errors.phone && (
                         <p className="text-xs text-destructive">{form.formState.errors.phone.message}</p>
@@ -536,11 +529,11 @@ export default function Home() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-sm font-semibold text-foreground">Country & Timezone</label>
+                      <label className="text-sm font-semibold text-foreground">{t("contact.form_country")}</label>
                       <input
                         {...form.register("country")}
                         className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        placeholder="e.g. USA (EST)"
+                        placeholder="e.g. Tunisia (GMT+1)"
                       />
                       {form.formState.errors.country && (
                         <p className="text-xs text-destructive">{form.formState.errors.country.message}</p>
@@ -549,12 +542,12 @@ export default function Home() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-foreground">Message</label>
+                    <label className="text-sm font-semibold text-foreground">{t("contact.form_message")}</label>
                     <textarea
                       {...form.register("message")}
                       rows={4}
                       className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
-                      placeholder="Tell me about your art goals..."
+                      placeholder={t("contact.form_message")}
                     />
                     {form.formState.errors.message && (
                       <p className="text-xs text-destructive">{form.formState.errors.message.message}</p>
@@ -568,10 +561,10 @@ export default function Home() {
                   >
                     {createInquiry.isPending ? (
                       <>
-                        <Loader2 className="w-5 h-5 animate-spin" /> Sending...
+                        <Loader2 className="w-5 h-5 animate-spin" /> {t("contact.form_sending")}
                       </>
                     ) : (
-                      "Send Inquiry"
+                      t("contact.form_send")
                     )}
                   </button>
                 </form>
@@ -585,19 +578,19 @@ export default function Home() {
       <section className="bg-purple-900 text-white py-12">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center gap-6">
-            <p className="text-lg font-semibold">Follow My Journey</p>
+            <p className="text-lg font-semibold">{t("social.follow")}</p>
             <div className="flex gap-6">
               <a
-                href="https://linkedin.com"
+                href="https://wa.me/21623774404"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all hover:scale-110"
-                title="LinkedIn"
+                title="WhatsApp"
               >
-                <Linkedin className="w-6 h-6" />
+                <MessageCircle className="w-6 h-6" />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/people/Manga-Art/61561385984895/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all hover:scale-110"
@@ -606,7 +599,7 @@ export default function Home() {
                 <Facebook className="w-6 h-6" />
               </a>
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/manga_art_tunis"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-all hover:scale-110"
@@ -628,11 +621,11 @@ export default function Home() {
             </span>
           </div>
 
-          <div className="text-sm text-muted-foreground text-center md:text-right">
-            <p>&copy; {new Date().getFullYear()} Manga Art Teacher. All rights reserved.</p>
-            <div className="flex gap-4 justify-center md:justify-end mt-2">
-              <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+          <div className={`text-sm text-muted-foreground ${isRtl ? "text-center md:text-left" : "text-center md:text-right"}`}>
+            <p>&copy; {new Date().getFullYear()} Manga Art Teacher. {t("footer.rights")}</p>
+            <div className={`flex gap-4 justify-center mt-2 ${isRtl ? "md:justify-start" : "md:justify-end"}`}>
+              <a href="#" className="hover:text-primary transition-colors">{t("footer.privacy")}</a>
+              <a href="#" className="hover:text-primary transition-colors">{t("footer.terms")}</a>
             </div>
           </div>
         </div>
