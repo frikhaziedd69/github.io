@@ -85,14 +85,16 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || "5000", 10);
-  httpServer.listen(
-    {
-      port,
-      host: "0.0.0.0",
-      reusePort: true,
-    },
-    () => {
-      log(`serving on port ${port}`);
-    },
-  );
+  // When running locally on Windows the `reusePort` option and binding
+  // to 0.0.0.0 can sometimes cause ENOTSUP errors. In development we bind to
+  // localhost and omit reusePort to avoid that.
+  const listenOptions: any = { port };
+  if (process.env.NODE_ENV === "production") {
+    listenOptions.host = "0.0.0.0";
+    listenOptions.reusePort = true;
+  }
+
+  httpServer.listen(listenOptions, () => {
+    log(`serving on port ${port}`);
+  });
 })();

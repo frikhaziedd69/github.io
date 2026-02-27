@@ -25,6 +25,7 @@ import { insertInquirySchema, type InsertInquiry } from "@shared/schema";
 import { useCreateInquiry } from "@/hooks/use-inquiries";
 import { Navigation } from "@/components/Navigation";
 import { SectionHeading } from "@/components/SectionHeading";
+import { normalizeArabicNumerals } from "@/lib/utils";
 
 // Assets
 import heroBg from "@assets/IMG_5241_1766236580283.jpeg";
@@ -69,15 +70,21 @@ export default function Home() {
   });
 
   const onSubmit = (data: InsertInquiry) => {
+    // Normalize phone number to ensure English numerals
+    const normalizedData = {
+      ...data,
+      phone: normalizeArabicNumerals(data.phone),
+    };
+
     // Send email via EmailJS
     emailjs.send(
       "service_1zsak8o",
       "template_2fvf1un",
       {
-        name: data.name,
-        phone_number: data.phone,
-        country: data.country,
-        message: data.message,
+        name: normalizedData.name,
+        phone_number: normalizedData.phone,
+        country: normalizedData.country,
+        message: normalizedData.message,
       },
       "lwYdfyBH1QlfP17WS"
     ).then(
@@ -85,7 +92,7 @@ export default function Home() {
       (error) => console.error("EmailJS Error:", error)
     );
 
-    createInquiry.mutate(data, {
+    createInquiry.mutate(normalizedData, {
       onSuccess: () => {
         form.reset();
       },
@@ -480,7 +487,8 @@ export default function Home() {
                       </div>
                       <div>
                         <p className="text-sm text-purple-200">{t("contact.whatsapp")}</p>
-                        <p className="font-medium">+216 23 774 404</p>
+                        {/* force LTR so numbers render correctly in RTL layout */}
+                        <p className="font-medium" dir="ltr">+21623774404</p>
                       </div>
                     </div>
                   </div>
@@ -530,7 +538,11 @@ export default function Home() {
                         {...form.register("phone")}
                         type="tel"
                         className="w-full px-4 py-3 rounded-lg bg-secondary/50 border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        placeholder="+216 23 774 404"
+                        placeholder="+21623774404" dir="ltr"
+                        onChange={(e) => {
+                          const normalized = normalizeArabicNumerals(e.target.value);
+                          form.setValue("phone", normalized);
+                        }}
                       />
                       {form.formState.errors.phone && (
                         <p className="text-xs text-destructive">{form.formState.errors.phone.message}</p>
