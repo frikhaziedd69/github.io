@@ -370,20 +370,20 @@ export default function Home() {
             {[
               {
                 title: t("services.beginner"),
-                price: "$24 / 2 hours",
-                features: ["services.features.anatomy", "services.features.proportions", "services.features.lineart", "services.features.2hours"],
+                price: i18n.language === 'ar' ? "$24 / ساعتين" : "$24 / 2 hours",
+                features: ["services.features.anatomy", "services.features.proportions", "services.features.2hours"],
                 ideal: t("services.ideal.beginner")
               },
               {
                 title: t("services.intermediate"),
-                price: "$79 / Month",
+                price: i18n.language === 'ar' ? "$79 / الشهر" : "$79 / Month",
                 features: ["services.features.perspective", "services.features.clothing", "services.features.posing", "services.features.assignments_2h"],
                 ideal: t("services.ideal.intermediate"),
                 highlight: true
               },
               {
                 title: t("services.advanced"),
-                price: "$149 / Month",
+                price: i18n.language === 'ar' ? "$149 / الشهر" : "$149 / Month",
                 features: ["services.features.portfolio", "services.features.storyboarding", "services.features.inking", "services.features.assignments_2h"],
                 ideal: t("services.ideal.advanced")
               }
@@ -472,6 +472,15 @@ export default function Home() {
                       <div>
                         <p className="text-sm text-purple-200">{t("contact.form_email")}</p>
                         <p className="font-medium">contact@mangaarttn.com</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                        <MessageCircle className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-purple-200">{t("contact.whatsapp")}</p>
+                        <p className="font-medium">+216 23 774 404</p>
                       </div>
                     </div>
                   </div>

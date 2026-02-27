@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import mangaLogo from "/images/manga-logo.png";
+import saFlag from "@assets/image_1772219438551.png";
+import ukFlag from "@assets/image_1772219482311.png";
 
 const navLinks = [
   { name: "nav.home", href: "#hero" },
@@ -81,20 +83,15 @@ export function Navigation() {
             
             <button
               onClick={toggleLanguage}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-full border border-border hover:bg-secondary transition-colors ${
-                isScrolled ? "text-black border-black/20" : "text-black border-black/20"
+              className={`flex items-center justify-center p-1 rounded-lg border border-border hover:bg-secondary transition-colors ${
+                isScrolled ? "border-black/20" : "border-black/20"
               }`}
+              title={i18n.language === 'en' ? "Switch to Arabic" : "Switch to English"}
             >
               {i18n.language === 'en' ? (
-                <>
-                  <span className="text-lg">🇸🇦</span>
-                  <span className="text-xs font-bold">AR</span>
-                </>
+                <img src={saFlag} alt="Arabic" className="w-8 h-5 object-cover rounded-sm shadow-sm" />
               ) : (
-                <>
-                  <span className="text-lg">🇬🇧</span>
-                  <span className="text-xs font-bold">EN</span>
-                </>
+                <img src={ukFlag} alt="English" className="w-8 h-5 object-cover rounded-sm shadow-sm" />
               )}
             </button>
 
@@ -115,9 +112,13 @@ export function Navigation() {
           <div className="flex items-center gap-4 md:hidden">
             <button
               onClick={toggleLanguage}
-              className="p-2 text-foreground"
+              className="p-1 border border-border rounded-md"
             >
-              {i18n.language === 'en' ? "🇸🇦" : "🇬🇧"}
+              {i18n.language === 'en' ? (
+                <img src={saFlag} alt="Arabic" className="w-8 h-5 object-cover rounded-sm" />
+              ) : (
+                <img src={ukFlag} alt="English" className="w-8 h-5 object-cover rounded-sm" />
+              )}
             </button>
             <button
               className="p-2 text-foreground"
