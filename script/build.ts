@@ -44,7 +44,6 @@ async function buildAll() {
   await rm("docs", { recursive: true, force: true });
   // copy built files into docs
   // Node 16+ supports recursive flag
-  import { cp } from "fs/promises";
   await cp("dist/public", "docs", { recursive: true });
 
   console.log("building server...");
