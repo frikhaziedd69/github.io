@@ -1,6 +1,6 @@
 import { build as esbuild } from "esbuild";
 import { build as viteBuild } from "vite";
-import { rm, readFile } from "fs/promises";
+import { rm, readFile, cp } from "fs/promises";
 
 // server deps to bundle to reduce openat(2) syscalls
 // which helps cold start times
@@ -37,6 +37,15 @@ async function buildAll() {
 
   console.log("building client...");
   await viteBuild();
+
+  // copy output to docs for GitHub Pages (ensure docs updated)
+  console.log("copying client build to docs folder...");
+  // remove existing docs to avoid stale files
+  await rm("docs", { recursive: true, force: true });
+  // copy built files into docs
+  // Node 16+ supports recursive flag
+  import { cp } from "fs/promises";
+  await cp("dist/public", "docs", { recursive: true });
 
   console.log("building server...");
   const pkg = JSON.parse(await readFile("package.json", "utf-8"));
